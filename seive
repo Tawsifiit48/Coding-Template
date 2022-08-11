@@ -1,0 +1,18 @@
+const int MXN = 2e7 + 9;
+int pr[MXN], pw[MXN];
+vi prime;
+
+void func() {
+    for(int i = 2; i < MXN; i++) {
+        if(pr[i] == 0) {
+            pw[i]++;
+            for(int j = i + i; j < MXN; j += i) {
+                pr[j] = 1;
+                pw[j]++;
+            }
+        }
+    }
+    for(int i = 2; i < MXN; i++) {
+        if(pr[i] == 0) prime.pb(i);
+    }
+}
