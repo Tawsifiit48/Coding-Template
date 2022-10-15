@@ -32,6 +32,6 @@ int query_k(int node, int b, int e, int k) {
     int lt = node << 1;
     int rt = lt + 1;
     if(seg[lt] >= k) {
-        return query(lt, b, mid, k);
-    } else return query(rt, mid + 1, e, k - seg[lt]);
+        return query_k(lt, b, mid, k);
+    } else return query_k(rt, mid + 1, e, k - seg[lt]);
 }
