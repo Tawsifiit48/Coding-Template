@@ -1,5 +1,5 @@
 #define SZ 100002
-int seg[3*SZ], arr[SZ];
+int seg[4*SZ], arr[SZ];
 
 void build(int node, int b, int e) {
 	if(b == e) {
