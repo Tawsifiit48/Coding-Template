@@ -1,4 +1,4 @@
-int lazy[SZ], st[SZ], arr[SZ];
+int lazy[4 * SZ], st[4 * SZ], arr[4 * SZ];
 
 inline void push(int node, int b, int e) {
     if (lazy[node] == 0) return;
