@@ -8,7 +8,7 @@ void build(int node, int b, int e) {
 	}
 	int lt = node << 1;
 	int rt = lt + 1;
-	int mid = (b + e) >> 1;
+	int mid = (b + e) / 2;
 	build(lt, b, mid);
 	build(rt, mid + 1, e);
 	seg[node] = seg[lt] + seg[rt];
@@ -24,7 +24,7 @@ void update(int node, int b, int e, int i, int newval) {
 	}
 	int lt = node << 1;
 	int rt = lt + 1;
-	int mid = (b + e) >> 1;
+	int mid = (b + e) / 2;
 	update(lt, b, mid, i, newval);
 	update(rt, mid + 1, e, i, newval);
 	seg[node] = seg[lt] + seg[rt];
