@@ -29,7 +29,7 @@ ll ncr(ll n, ll r, ll p) {
 
 void FACT() {
     fact[0] = 1;
-    f(i, 1, SZ) {
+    fe(i, 1, SZ - 1) {
         fact[i] = (fact[i - 1] * i) % mod;
     }
 }
