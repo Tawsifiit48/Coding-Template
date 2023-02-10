@@ -1,0 +1,44 @@
+<snippet>
+	<content><![CDATA[
+ll fact[SZ];
+
+ll binpower(ll x, ll y, ll p) {
+    ll res = 1;
+    x = x % p;
+    while(y > 0) {
+        if(y & 1) {
+            res = (res * x) % p;
+            if(res <= 0) res += p;
+        }
+        y = y >> 1;
+        x = (x * x) % p;
+    }
+    return res;
+}
+
+
+ll modinverse(ll n, ll p) {
+    return binpower(n, p - 2, p);
+}
+
+
+ll ncr(ll n, ll r, ll p) {
+    if(n < r) return 0;
+    if(r == 0) return 1;
+    
+    return (fact[n] * modinverse(fact[r], p) % p * modinverse(fact[n - r], p) % p) % p;
+}   
+
+void FACT() {
+    fact[0] = 1;
+    f(i, 1, SZ) {
+        fact[i] = (fact[i - 1] * i) % mod;
+    }
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ncr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

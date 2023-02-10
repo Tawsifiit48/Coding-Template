@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+int timer = 0, st[SZ], en[SZ], lvl[SZ];
+vi v[SZ];
+
+
+void tour(int u, int p) {
+    lvl[u] = 1 + lvl[p];
+
+    st[u] = timer++;
+    for (int i : v[u]) {
+        if (i != p) {
+            tour(i, u);
+        }
+    }
+    en[u] = timer++;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>eulertour</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

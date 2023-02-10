@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+int parent[SZ], child[SZ];
+
+void make_set(int a) {
+    parent[a] = a;
+    child[a] = 1;
+}
+
+int find_set(int a) {
+    if (a == parent[a])
+        return a;
+    return parent[a] = find_set(parent[a]);
+}
+
+void union_sets(int a, int b) {
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b) {
+        if (child[a] < child[b])
+            swap(a, b);
+        parent[b] = a;
+        child[a] += child[b];
+    }
+}
+
+void pre(int n) {
+    fe(i, 1, n) {
+        make_set(i);
+        parent[i] = 0;
+        child[i] = 0;
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dsu</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

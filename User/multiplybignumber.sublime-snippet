@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+string multiply(string s, ll n) {
+    string res = "";
+    ll carry = 0;
+    for(int i = 0; i < s.size(); i++) {
+        carry += n * (s[i] - '0');
+        res += '0' + carry % 10;
+        carry /= 10;
+    }
+    while(carry) {
+        res += '0' + carry % 10;
+        carry /= 10;
+    }
+    // end product has to be reversed
+    return res;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>multiplybignumber</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
