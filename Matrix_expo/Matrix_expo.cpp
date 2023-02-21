@@ -47,13 +47,16 @@ const ll mod = 1e9 + 7;
 #define SZ 110
 
 int n, m;
+
+#define MX 105
+
 struct matrix
 {
-    ll mat[110][110];
+    ll mat[MX][MX];
  
     matrix(int x) {
-        for(int i = 1; i <= m; i++) {
-            for(int j = 1; j <= m; j++) mat[i][j] = x;
+        for(int i = 1; i < MX; i++) {
+            for(int j = 1; j < MX; j++) mat[i][j] = x;
         }
     }
 
@@ -61,11 +64,11 @@ struct matrix
     {
         matrix res(0);
  
-        for(int i = 1; i <= m; i++)
+        for(int i = 1; i < MX; i++)
         {
-            for(int j = 1; j <= m; j++)
+            for(int j = 1; j < MX; j++)
             {
-                for(int k = 1; k <= m; k++)
+                for(int k = 1; k < MX; k++)
                 {
                     ll p = (1LL*mat[i][k]*rhs.mat[k][j]);
                     if(p >= mod) p %= mod;
@@ -97,7 +100,6 @@ matrix powi()
     return res;
 }
 
-//https://codeforces.com/contest/1117/problem/D
 
 void solve() {
     cin >> n >> m;
