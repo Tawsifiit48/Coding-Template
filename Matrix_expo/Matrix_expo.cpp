@@ -46,7 +46,7 @@ const ll mod = 1e9 + 7;
 
 #define SZ 110
 
-int n, m;
+ll n, m;
 
 #define MX 105
 
@@ -111,7 +111,7 @@ void solve() {
     fe(i, 2, m) {
         rec.mat[i][i - 1] = 1;
     }
-    n = n - m;
+    n = n - m + 1;
     rec = powi();
     cout << rec.mat[1][1] << N;
 }
