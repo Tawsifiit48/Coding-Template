@@ -61,21 +61,21 @@ struct HLD {
         }
     }
 
-    void hld_query(int x, int y) {
+    ll hld_query(int x, int y) {
         ll ret = 1e15;
         while(chain[x] != chain[y]) {
             if(lvl[lead[chain[x]]] < lvl[lead[chain[y]]]) {
-                //ret = min(ret, query(pos[lead[chain[y]]], pos[y]))
+                //ret = cmp(ret, query(pos[lead[chain[y]]], pos[y]))
                 y = par[lead[chain[y]]];
             } else {
-                //ret = min(ret, query(pos[lead[chain[x]]], pos[x]))
+                //ret = cmp(ret, query(pos[lead[chain[x]]], pos[x]))
                 x = par[lead[chain[x]]];
             }
         }
         if(lvl[x] < lvl[y]) {
-            //ret = min(ret, query(pos[x] + 1, pos[y]));   
+            //ret = cmp(ret, query(pos[x] + 1, pos[y]));   
         } else {
-            //ret = min(ret, query(pos[y] + 1, pos[x]));   
+            //ret = cmp(ret, query(pos[y] + 1, pos[x]));   
         }
         return ret;
     }
