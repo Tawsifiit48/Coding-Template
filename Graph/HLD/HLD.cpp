@@ -79,4 +79,6 @@ struct HLD {
         }
         return ret;
     }
+    //dfs(1, 1);
+    //hld(1, 0, 1);
 };
