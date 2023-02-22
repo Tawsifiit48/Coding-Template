@@ -44,7 +44,7 @@ struct HLD {
         }
     }
 
-    void hld_update(int x, int y) {
+    void hld_update(int x, int y, ll val) {
         while(chain[x] != chain[y]) {
             if(lvl[lead[chain[x]]] < lvl[lead[chain[y]]]) {
                 //update (pos[lead[chain[y]]], pos[y])
