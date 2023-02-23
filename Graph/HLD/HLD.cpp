@@ -1,5 +1,5 @@
-int lead[SZ], chain[SZ], lvl[SZ], pos[SZ], sub[SZ], par[SZ];
-int chain_no, timer;
+ll lead[SZ], chain[SZ], lvl[SZ], pos[SZ], sub[SZ], par[SZ];
+ll chain_no, timer;
 
 struct HLD {
 
@@ -55,7 +55,7 @@ struct HLD {
             }
         }
         if(lvl[x] < lvl[y]) {
-            //update (pos[x] + 1, pos[y])   
+            //update (pos[x] + 1, pos[y])  
         } else {
             //update(pos[y] + 1, pos[x]);
         }
