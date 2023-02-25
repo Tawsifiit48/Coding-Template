@@ -83,3 +83,4 @@ int sum_x(int node, int bx, int ex, int x1, int x2, int y1, int y2) {
     return sum_x(node * 2, bx, mid, x1, min(x2, mid), y1, y2)
          + sum_x(node * 2 + 1, mid + 1, ex, max(x1, mid + 1), x2, y1, y2);
 }
+// set n, m to max_n + 1, max_m + 1
