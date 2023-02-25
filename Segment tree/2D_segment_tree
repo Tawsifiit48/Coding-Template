@@ -1,4 +1,4 @@
-#define SZ 1003
+#define SZ 3003
 
 int seg[SZ][SZ], arr[SZ][SZ], n, m;
 
