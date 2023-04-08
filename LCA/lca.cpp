@@ -38,6 +38,28 @@ struct LCA {
         }
         return up[u][0];
     }
+ 
+    int func(int x, int y) {
+        if(lvl[x] > lvl[y]) {
+            swap(x, y);
+        }
+        int dis = lvl[y] - lvl[x];
+        for(int i = l; i >= 0; i--) {
+            if((1 << i)&dis) {
+                dis -= (1 << i);
+                y = up[y][i];
+            }
+        }
+        if(x == y) {
+            return x;
+        }
+        for(int i = l; i >= 0; i--) {
+            if(up[x][i] == up[y][i] or up[x][i] == 0) continue;
+            x = up[x][i];
+            y = up[y][i];
+        }
+        return up[x][0];
+    }
      
     int lift_dis(int a, int dist)
     {
