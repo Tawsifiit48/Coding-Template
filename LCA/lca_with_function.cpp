@@ -32,26 +32,23 @@ struct LCA {
         tout[u] = ++timer;
     }
      
-    bool is_ancestor(int u, int v)
-    {
-        return tin[u] <= tin[v] && tout[u] >= tout[v];
+    bool is_ancestor(int x, int y) {
+        return tin[x] <= tin[y] && tout[x] >= tout[y];
     }
      
-    int lca_find(int u, int v)
-    {
-        if (is_ancestor(u, v))
-            return u;
-        if (is_ancestor(v, u))
-            return v;
+    int lca_find(int x, int y) {
+        if (is_ancestor(x, y))
+            return x;
+        if (is_ancestor(y, x))
+            return y;
         for (int i = l; i >= 0; --i) {
-            if (!is_ancestor(up[u][i], v))
-                u = up[u][i];
+            if (!is_ancestor(up[x][i], y))
+                x = up[x][i];
         }
-        return up[u][0];
+        return up[x][0];
     }
      
-    int lift_dis(int a, int dist)
-    {
+    int lift_dis(int a, int dist) {
         for(int i = l; i >= 0; i--)
         {
             if((1 << i) <= dist) {
@@ -89,7 +86,7 @@ struct LCA {
             }
         }
         if(x == y) {
-            return {ans1, ans2};
+            return {ans1, ans2}; // when vertex has value lca l is not calculated. calculate it separately
         }
         for(int i = l; i >= 0; i--) {
             if(up[x][i] == up[y][i] or up[x][i] == 0) continue;
@@ -104,6 +101,6 @@ struct LCA {
         ans1 = max(ans1, sp_mx[y][0]);
         ans2 = min(ans2, sp_mn[x][0]);
         ans2 = min(ans2, sp_mn[y][0]);
-        return {ans1, ans2};
+        return {ans1, ans2}; //when vertex has value lca l is not calculated. calculate it separately
     }
 };
