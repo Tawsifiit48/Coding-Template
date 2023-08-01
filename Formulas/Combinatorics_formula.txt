@@ -1,0 +1,11 @@
+---- Grid Traverse -----
+
+(0, 0) to (i, j) number of ways to go
+    -> (i + j) C i;
+
+
+suppose we fix i;
+so i = n;
+summation of (j = 0 to j = k)
+    -> (n + j) C (n)
+    -> (n + k + 1) C (n + 1)
