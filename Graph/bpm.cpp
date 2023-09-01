@@ -5,7 +5,7 @@ struct bpm{
     int n, m;
     bpm(int n, int m) : n(n), m(m) {
         G.resize(n + 1);
-        match.resize(n + 1, 0);
+        match.resize(n + m + 1, 0);
         dist.resize(n + 1);
     }
     void add_edge(int i, int j) {
