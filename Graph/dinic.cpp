@@ -1,80 +1,73 @@
-struct FlowEdge {
-    int v, u;
-    long long cap, flow = 0;
-    FlowEdge(int v, int u, long long cap) : v(v), u(u), cap(cap) {}
+struct edge {
+    int u, v;
+    long long capacity, flow = 0;
+    edge(int u, int v, long long capacity) : u(u), v(v), capacity(capacity) {}
 };
-
+ 
 struct Dinic {
-    const long long flow_inf = 1e18;
-    vector<FlowEdge> edges;
-    vector< int > adj[SZ];
-    int n, m = 0;
-    int s, t;
-    vector<int> level, ptr;
-    queue<int> q;
-
+    int s, t, id = 0, n;
+    const long long INF = 0x3f3f3f3f3f3f3f3f;
+    vector <edge> edges;
+    vector <vector <int> > adj;
+    vector <int> lvl, ptr;
+    queue  <int> Q;
+ 
     Dinic(int n, int s, int t) : n(n), s(s), t(t) {
-        level.resize(n);
+        adj.resize(n);
+        lvl.resize(n);
         ptr.resize(n);
     }
-
-    void add_edge(int v, int u, long long cap) {
-        edges.emplace_back(v, u, cap);
-        edges.emplace_back(u, v, 0);
-        adj[v].push_back(m);
-        adj[u].push_back(m + 1);
-        m += 2;
+ 
+    void add_edge(int u, int v, long long capacity) {
+        edges.push_back(edge(u, v, capacity));
+        edges.push_back(edge(v, u, 0));
+        adj[u].push_back(id);
+        adj[v].push_back(id + 1);
+        id += 2;
     }
-
-    bool bfs() {
-        while (!q.empty()) {
-            int v = q.front();
-            q.pop();
-            for (int id : adj[v]) {
-                if (edges[id].cap - edges[id].flow < 1)
-                    continue;
-                if (level[edges[id].u] != -1)
-                    continue;
-                level[edges[id].u] = level[v] + 1;
-                q.push(edges[id].u);
+ 
+    int bfs() {
+        fill(lvl.begin(), lvl.end(), -1);
+        fill(ptr.begin(), ptr.end(),  0);
+        Q.push(s);
+        lvl[s] = 0;
+        while(!Q.empty()) {
+            int u = Q.front();
+            Q.pop();
+            for(int i = 0; i < adj[u].size(); i++) {
+                if(lvl[edges[adj[u][i]].v] != -1 || edges[adj[u][i]].capacity - edges[adj[u][i]].flow == 0)
+                        continue;
+                lvl[edges[adj[u][i]].v] = lvl[u] + 1;
+                Q.push(edges[adj[u][i]].v);
             }
         }
-        return level[t] != -1;
+        return lvl[t] != -1;
     }
-
-    long long dfs(int v, long long pushed) {
-        if (pushed == 0)
-            return 0;
-        if (v == t)
+ 
+    int dfs(int u, long long pushed) {
+       if(!pushed || u == t)
             return pushed;
-        for (int& cid = ptr[v]; cid < (int)adj[v].size(); cid++) {
-            int id = adj[v][cid];
-            int u = edges[id].u;
-            if (level[v] + 1 != level[u] || edges[id].cap - edges[id].flow < 1)
+       for(int& i = ptr[u]; i < adj[u].size(); i++) {
+            int idx = adj[u][i];
+            int v = edges[idx].v;
+            if(lvl[v] != lvl[u] + 1)
                 continue;
-            long long tr = dfs(u, min(pushed, edges[id].cap - edges[id].flow));
-            if (tr == 0)
-                continue;
-            edges[id].flow += tr;
-            edges[id ^ 1].flow -= tr;
-            return tr;
-        }
-        return 0;
-    }
-
-    long long flow() {
-        long long f = 0;
-        while (true) {
-            fill(level.begin(), level.end(), -1);
-            level[s] = 0;
-            q.push(s);
-            if (!bfs())
-                break;
-            fill(ptr.begin(), ptr.end(), 0);
-            while (long long pushed = dfs(s, flow_inf)) {
-                f += pushed;
+            long long x = dfs(v, min(pushed, edges[idx].capacity - edges[idx].flow));
+            if(x > 0) {
+                edges[idx ^ 0].flow += x;
+                edges[idx ^ 1].flow -= x;
+                return x;
             }
-        }
-        return f;
+       }
+       return 0;
+    }
+ 
+    long long maxFlow() {
+        long long flow = 0, x;
+        while(bfs())
+           while(x = dfs(s, INF)) {
+                flow += x;
+           }
+        return flow;
     }
 };
