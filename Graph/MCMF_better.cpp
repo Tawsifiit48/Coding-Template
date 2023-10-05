@@ -21,7 +21,7 @@ struct MCMF {
 
     void add_edge(int u, int v, ll cap, ll val) {
         adj[u].pb(FlowEdge(u, v, cap, val, adj[v].size()));
-        adj[v].pb(FlowEdge(v, u, 0, -val, adj[u].size()));
+        adj[v].pb(FlowEdge(v, u, 0, -val, adj[u].size() - 1));
     }
 
     void shortest_paths(int s) {
